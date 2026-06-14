@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # UnfallAtlas API
 
 UnfallAtlas integrates official German road-accident open data into a normalized PostgreSQL database. It exposes reproducible answers through a documented FastAPI service and a React dashboard, with source and license provenance attached to every data response.
@@ -73,3 +74,7 @@ Every API data response includes `license` and `sources`. `/metadata/sources` ad
 | Accidents per 100k inhabitants (cross-source) | `GET /aggregates/rates?year=2023&level=district&top_n=10` |
 
 The count endpoint executes a single `COUNT(*)` query. Aggregates execute SQL `GROUP BY` queries. Rates join accident counts to region population and exclude regions without population.
+=======
+# dbw_project
+This is an academic project which is based on analysing accidents in Germany.
+>>>>>>> b9c942299eb8ffe0403f9e533988d4f5b4f5a831
