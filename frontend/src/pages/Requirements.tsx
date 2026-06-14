@@ -94,10 +94,12 @@ export function Requirements() {
   }, []);
 
   return (
-    <div>
-      <h1>Project Requirements Demonstration</h1>
+    <main style={{ maxWidth: 960, margin: '0 auto', padding: '3rem 5vw' }}>
+      <h1 style={{ fontSize: 'clamp(2.5rem, 4vw, 3.6rem)', marginBottom: 16 }}>
+        Project Requirements Demonstration
+      </h1>
 
-      <p>
+      <p style={{ maxWidth: 760, lineHeight: 1.7, marginBottom: 24 }}>
         This page demonstrates all mandatory project questions and
         cross-source aggregations.
       </p>
@@ -105,16 +107,17 @@ export function Requirements() {
       {loading && <p>Loading...</p>}
 
       {requirements.map((req) => (
-        <div
+        <section
           key={req.endpoint}
           style={{
-            border: "1px solid #ddd",
-            borderRadius: 8,
-            padding: 16,
-            marginBottom: 16,
+            border: '1px solid #ddd',
+            borderRadius: 12,
+            padding: 24,
+            marginBottom: 24,
+            background: '#fff',
           }}
         >
-          <h3>{req.title}</h3>
+          <h3 style={{ marginTop: 0 }}>{req.title}</h3>
 
           <p>
             <strong>Endpoint:</strong> {req.endpoint}
@@ -147,8 +150,8 @@ export function Requirements() {
               )}
             </pre>
           </details>
-        </div>
+        </section>
       ))}
-    </div>
+    </main>
   );
 }
