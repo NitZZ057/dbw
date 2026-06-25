@@ -22,7 +22,7 @@ const categoryData = [
   { name: 'Night', value: 18 },
   { name: 'Weekend', value: 14 }
 ];
-const categoryColors = ['#3b82f6', '#2563eb', '#10b981', '#f59e0b'];
+const categoryColors = ['#3b82f6', '#2563eb', '#22c55e', '#f59e0b'];
 const monthlyTrend = [
   { month: 'Jan', accidents: 1120 },
   { month: 'Feb', accidents: 980 },
@@ -114,15 +114,31 @@ export function Dashboard(): ReactElement {
                 <h3>Category breakdown</h3>
                 <span className="api-tag">GET /aggregates/rates?year=2023</span>
               </div>
-              <ResponsiveContainer width="100%" height={280}>
-                <PieChart>
-                  <Pie data={categoryData} dataKey="value" nameKey="name" innerRadius={56} outerRadius={100} paddingAngle={4} cornerRadius={10}>
+              <ResponsiveContainer width="100%" height={340}>
+                <PieChart width={280} height={280} margin={{ top: 20, right: 12, left: 12, bottom: 20 }}>
+                  <Pie
+                    data={categoryData}
+                    dataKey="value"
+                    nameKey="name"
+                    innerRadius={54}
+                    outerRadius={88}
+                    paddingAngle={4}
+                    cornerRadius={8}
+                    cx="50%"
+                    cy="50%"
+                  >
                     {categoryData.map((entry, index) => (
                       <Cell key={`cell-${index}`} fill={categoryColors[index % categoryColors.length]} />
                     ))}
                   </Pie>
                   <Tooltip />
-                  <Legend layout="vertical" verticalAlign="middle" align="right" iconType="circle" />
+                  <Legend
+                    layout="vertical"
+                    verticalAlign="middle"
+                    align="right"
+                    iconType="circle"
+                    wrapperStyle={{ right: 8, top: '50%', transform: 'translateY(-50%)', maxWidth: 130 }}
+                  />
                 </PieChart>
               </ResponsiveContainer>
             </div>
@@ -153,49 +169,6 @@ export function Dashboard(): ReactElement {
           </div>
         </section>
 
-        <section className="dashboard-panel full-width">
-          <div className="panel-header">
-            <h2>Accident explorer</h2>
-            <span className="api-tag">GET /accidents</span>
-          </div>
-          <div className="explorer-filters">
-            <div className="filter-group">
-              <label>Year</label>
-              <select>
-                <option>2023</option>
-                <option>2022</option>
-                <option>2021</option>
-              </select>
-            </div>
-            <div className="filter-group">
-              <label>Month</label>
-              <select>
-                <option>All</option>
-                <option>Q1</option>
-                <option>Q2</option>
-              </select>
-            </div>
-            <div className="filter-group">
-              <label>Weekday</label>
-              <select>
-                <option>All</option>
-                <option>Weekday</option>
-                <option>Weekend</option>
-              </select>
-            </div>
-            <div className="filter-group">
-              <label>Category</label>
-              <select>
-                <option>All</option>
-                <option>Urban</option>
-                <option>Rural</option>
-              </select>
-            </div>
-            <button className="search-button">Run query</button>
-          </div>
-          <div className="results-summary">Showing top 100 records from the accidents dataset.</div>
-          <div className="table-placeholder">[Accident results preview]</div>
-        </section>
       </div>
     </main>
   );

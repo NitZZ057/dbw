@@ -1,6 +1,6 @@
 import { Row } from '../types/api';
 import type { ReactElement } from 'react';
-export function ResultsTable({ rows }: {rows: Row[]}): ReactElement {
+export function ResultsTable({ rows }: { rows: Row[] }): ReactElement {
   const keys = rows.length ? Object.keys(rows[0]) : [];
   const renderCell = (val: unknown): string => {
     if (val === null || val === undefined) return '—';

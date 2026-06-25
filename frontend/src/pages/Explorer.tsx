@@ -7,8 +7,8 @@ import { Row } from '../types/api';
 
 type Preset = { label: string; query?: Query; endpoint?: string };
 export function Explorer(): ReactElement {
-  const [rows,setRows]=useState<Row[]>([]);
-  const [meta,setMeta]=useState({license:'',sources:[] as string[]});
+  const [rows, setRows] = useState<Row[]>([]);
+  const [meta, setMeta] = useState({ license: '', sources: [] as string[] });
 
   const makeRows = (path: string, data: unknown): Row[] => {
     if (path.startsWith('/accidents/count')) {
@@ -17,8 +17,8 @@ export function Explorer(): ReactElement {
         count: new Intl.NumberFormat().format(payload.count),
         filters_applied: payload.filters_applied
           ? Object.entries(payload.filters_applied)
-              .map(([k, v]) => `${k}: ${v}`)
-              .join(' · ')
+            .map(([k, v]) => `${k}: ${v}`)
+            .join(' · ')
           : '—',
       }];
     }
@@ -36,8 +36,8 @@ export function Explorer(): ReactElement {
     const path = q.type === 'rates'
       ? `/aggregates/rates?year=${q.year}&level=district&top_n=${q.top_n}`
       : q.type === 'coverage'
-      ? '/time/coverage'
-      : `/accidents/count?year=${q.year}${q.state ? `&state_ags=${q.state}` : ''}${q.category ? `&category=${q.category}` : ''}${q.type === 'pedestrian' ? '&ist_fuss=true' : ''}`;
+        ? '/time/coverage'
+        : `/accidents/count?year=${q.year}${q.state ? `&state_ags=${q.state}` : ''}${q.category ? `&category=${q.category}` : ''}${q.type === 'pedestrian' ? '&ist_fuss=true' : ''}`;
     const response = await api.get(path);
     const data = response.data.data;
     setRows(makeRows(path, data));
@@ -73,7 +73,7 @@ export function Explorer(): ReactElement {
 
   return <main>
     <h1>Query explorer</h1>
-    <QueryPanel run={run}/>
+    <QueryPanel run={run} />
     <section className="panel" style={{ marginTop: '2rem', overflow: 'hidden', padding: 24 }}>
       <h2>Mandatory exam questions</h2>
       <div style={{ display: 'flex', marginTop: '1rem' }}>
@@ -91,7 +91,7 @@ export function Explorer(): ReactElement {
         </div>
       </div>
     </section>
-    <ResultsTable rows={rows}/>
-    {meta.license&&<SourceMetadata {...meta}/>}  
+    <ResultsTable rows={rows} />
+    {meta.license && <SourceMetadata {...meta} />}
   </main>;
 }
